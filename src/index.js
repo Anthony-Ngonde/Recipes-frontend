@@ -1,9 +1,18 @@
 import React, {useEffect, useState} from 'react'
-import ReactDOM from 'react'
+import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom'
 
 
 const App=()=>{
-    
+
+
+    useEffect(
+        ()=>{
+            fetch('/recipe/hello')
+            .then(response=>response.json())
+            .then(data=>console.log(data))
+        },[]
+    )
     const [message, setMessage] = useState('')
     return (
         <div className="app">
@@ -13,4 +22,5 @@ const App=()=>{
 }
 
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
