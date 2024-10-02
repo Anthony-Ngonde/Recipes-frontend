@@ -5,16 +5,22 @@ import {useForm} from 'react-hook-form'
 
 
 const SignUpPage=()=>{
-    const [username, setUsername]=useState('')
-    const [email, setEmail]=useState('')
-    const [password, setPassword]=useState('')
-    const [confirmPassword, setConfirmPassword]=useState('')
 
-    const {register, watch, handleSubmit, formState:{errors}} = useForm();
+    const { register, watch, handleSubmit, reset, formState:{ errors } } = useForm();
 
-    const submitForm=(data)=>{
+    const submitForm = (data)=>{
+
         console.log(data)
+
+        reset()
+
     }
+
+    console.log(watch("username"));
+    console.log(watch("email"));
+    console.log(watch("password"));
+    console.log(watch("confirmPassword"));
+    
 
 
     return(
@@ -30,8 +36,10 @@ const SignUpPage=()=>{
                         // name="username"
                         // onChange={(e)=>{setUsername(e.target.value)}}
                         />
+                        <br></br>
+                         {errors.username && <p style={{color:"red"}}><small>Username is required</small></p>}
                     </FormGroup>
-                    <br></br>
+                     <br></br>
                     <FormGroup>
                         <FormLabel>Email</FormLabel>
                         <FormControl type="email" placeholder="Your email"
@@ -40,6 +48,8 @@ const SignUpPage=()=>{
                         // name="email"
                         // onChange={(e)=>{setEmail(e.target.value)}}
                         />
+                        <br></br>
+                        {errors.email && <p style={{color:"red"}}><small>Email is required</small></p>}
                     </FormGroup>
                     <br></br>
                     <FormGroup>
@@ -50,6 +60,8 @@ const SignUpPage=()=>{
                         // name="password"
                         // onChange={(e)=>{setPassword(e.target.value)}}
                         />
+                        <br></br>
+                        {errors.password && <p style={{color:"red"}}><small>Password is required</small></p>}
                     </FormGroup>
                     <br></br>
                     <FormGroup>
@@ -60,6 +72,8 @@ const SignUpPage=()=>{
                         // name="confirmPassword"
                         // onChange={(e)=>{setConfirmPassword(e.target.value)}}
                         />
+                        <br></br>
+                        {errors.confirmPassword && <p style={{color:"red"}}><small>Confirm Password is required</small></p>}
                     </FormGroup>
                     <br></br>
                     <FormGroup>
