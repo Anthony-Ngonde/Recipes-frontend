@@ -12,17 +12,8 @@ const SignUpPage=()=>{
 
     const {register, watch, handleSubmit, formState:{errors}} = useForm();
 
-    const submitForm=()=>{
-        console.log("Form submitted");
-        console.log(username)
-        console.log(email)
-        console.log(password)
-        console.log(confirmPassword)
-
-        setUsername('')
-        setEmail('')
-        setPassword('')
-        setConfirmPassword('')
+    const submitForm=(data)=>{
+        console.log(data)
     }
 
 
@@ -34,7 +25,7 @@ const SignUpPage=()=>{
                     <FormGroup>
                         <FormLabel>Username</FormLabel>
                         <FormControl type="text" placeholder="Your username"
-                        {}
+                        {...register("username",  {required:true,maxLength:25})}
                         // value={username}
                         // name="username"
                         // onChange={(e)=>{setUsername(e.target.value)}}
@@ -44,32 +35,35 @@ const SignUpPage=()=>{
                     <FormGroup>
                         <FormLabel>Email</FormLabel>
                         <FormControl type="email" placeholder="Your email"
-                         value={email}
-                        name="email"
-                        onChange={(e)=>{setEmail(e.target.value)}}
+                        {...register("email",  {required:true,maxLength:80})}
+                        //  value={email}
+                        // name="email"
+                        // onChange={(e)=>{setEmail(e.target.value)}}
                         />
                     </FormGroup>
                     <br></br>
                     <FormGroup>
                         <FormLabel>Password</FormLabel>
                         <FormControl type="password" placeholder="Your password"
-                         value={password}
-                        name="password"
-                        onChange={(e)=>{setPassword(e.target.value)}}
+                        {...register("password",  {required:true,minLength:8})}
+                        //  value={password}
+                        // name="password"
+                        // onChange={(e)=>{setPassword(e.target.value)}}
                         />
                     </FormGroup>
                     <br></br>
                     <FormGroup>
                         <FormLabel>Confirm Password</FormLabel>
                         <FormControl type="password" placeholder="Your password"
-                         value={confirmPassword}
-                        name="confirmPassword"
-                        onChange={(e)=>{setConfirmPassword(e.target.value)}}
+                        {...register("confirmPassword",  {required:true,minLength:25})}
+                        //  value={confirmPassword}
+                        // name="confirmPassword"
+                        // onChange={(e)=>{setConfirmPassword(e.target.value)}}
                         />
                     </FormGroup>
                     <br></br>
                     <FormGroup>
-                        <Button as="sub" variant="primary" onClick={submitForm}>SignUp</Button>
+                        <Button as="sub" variant="primary" onClick={handleSubmit(submitForm)}>SignUp</Button>
                     </FormGroup>
                     <FormGroup>
                         <small>Already have an account, <Link to='/login'>Log in</Link></small>
