@@ -5,3 +5,8 @@
 .heading{
     font-size: 3em;
 }
+
+.form{
+    margin: auto;
+    width: 80%;
+}
