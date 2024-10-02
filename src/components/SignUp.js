@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form, FormControl, FormGroup, FormLabel, Button } from "react-bootstrap";
+import  { Link } from 'react-router-dom'
+import {useForm} from 'react-hook-form'
 
 
 const SignUpPage=()=>{
@@ -7,6 +9,8 @@ const SignUpPage=()=>{
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
     const [confirmPassword, setConfirmPassword]=useState('')
+
+    const {register, watch, handleSubmit, formState:{errors}} = useForm();
 
     const submitForm=()=>{
         console.log("Form submitted");
@@ -30,9 +34,10 @@ const SignUpPage=()=>{
                     <FormGroup>
                         <FormLabel>Username</FormLabel>
                         <FormControl type="text" placeholder="Your username"
-                        value={username}
-                        name="username"
-                        onChange={(e)=>{setUsername(e.target.value)}}
+                        {}
+                        // value={username}
+                        // name="username"
+                        // onChange={(e)=>{setUsername(e.target.value)}}
                         />
                     </FormGroup>
                     <br></br>
@@ -66,6 +71,10 @@ const SignUpPage=()=>{
                     <FormGroup>
                         <Button as="sub" variant="primary" onClick={submitForm}>SignUp</Button>
                     </FormGroup>
+                    <FormGroup>
+                        <small>Already have an account, <Link to='/login'>Log in</Link></small>
+                    </FormGroup>
+                    <br></br>
                 </form>
             </div>
         </div>

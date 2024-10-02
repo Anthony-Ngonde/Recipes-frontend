@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { Form, FormControl, FormGroup, FormLabel, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const LoginPage=()=>{
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
     const loginUser=()=>{
-        console.log(username)
-        console.log(password)
+        console.log(username);
+        console.log(password);
+
+        setUsername('')
+        setPassword('')
     }
 
-    setUsername('')
-    setPassword('')
+   
 
 
     return(
@@ -40,6 +43,10 @@ const LoginPage=()=>{
                     <FormGroup>
                         <Button as="sub" variant="primary" onClick={loginUser}>Login</Button>
                     </FormGroup>
+                    <FormGroup>
+                        <small>Do not have an account? <Link to='/signup'>Create One</Link></small>
+                    </FormGroup>
+                    <br></br>
                 </form>
             </div>
         </div>
