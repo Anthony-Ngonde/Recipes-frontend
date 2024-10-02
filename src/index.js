@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import NavBar from './components/Navbar';
 import HomePage from './components/Home';
 import SignUpPage from './components/SignUp';
@@ -38,7 +38,7 @@ const App=()=>{
 
     return(
         <Router>
-        <div className="container">
+        <div className>
             <NavBar />
             <Routes>
             <Route path='/create_recipe' element={<CreateRecipePage />} />
