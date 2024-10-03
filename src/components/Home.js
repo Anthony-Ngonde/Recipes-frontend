@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../auth";
 
 
 const LoggedinHome=()=>{
@@ -20,8 +21,15 @@ const LoggedOutHome=()=>{
 }
 
 const HomePage=()=>{
+
+    const [logged] = useAuth()
+
+
     return(
-       {}
+        <div>
+            {logged?<LoggedinHome/>:<LoggedOutHome/>}
+        </div>
+       
     )
 }
 
