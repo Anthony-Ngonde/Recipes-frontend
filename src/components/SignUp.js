@@ -1,11 +1,15 @@
-import React from "react";
-import { Form, FormControl, FormGroup, FormLabel, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, FormControl, FormGroup, FormLabel, Button, Alert } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const SignUpPage = () => {
 
     const { register, watch, handleSubmit, reset, formState: { errors } } = useForm();
+
+    const [show, setShow] = useState(true)
+
+    const [serverResponse, setServerResponse] = useState('')
 
     const submitForm = (data) => {
 
@@ -28,7 +32,10 @@ const SignUpPage = () => {
     
             fetch('/auth/signup', requestOptions)
             .then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                setServerResponse(data.message)
+                console.log(serverResponse)
+            })
             .catch(err=>console.log(err))
             
     
@@ -46,7 +53,24 @@ const SignUpPage = () => {
     return (
         <div className="container">
             <div className="form">
+                
+                {show?
+                <>
                 <h1>Sign Up Page</h1>
+            <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                    <p>
+                    Change this and that and try again. Duis mollis, est non commodo
+                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+                    Cras mattis consectetur purus sit amet fermentum.
+                    </p>
+            </Alert>
+                </>
+                :
+                <h1>Sign Up Page</h1>
+           
+                }
+
                 {/* Add onSubmit to the form */}
                 <form onSubmit={handleSubmit(submitForm)}> 
                     <FormGroup>
