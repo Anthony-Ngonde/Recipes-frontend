@@ -7,6 +7,32 @@ const CreateRecipePage=()=>{
 
     const {register, handleSubmit, reset, formState:{errors}} = useForm()
 
+    const createRecipe =(data)=>{
+        console.log(data)
+        const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY');
+        console.log(token)
+
+        const requestOptions={
+            method:'POST',
+            headers:{
+                'content-type':'application/json',
+                'Authorization':`Bearer ${JSON.parse(token)}`
+            },
+            body:JSON.stringify(data)
+
+        }
+
+        fetch('/recipe/recipes', requestOptions)
+        .then(res=>res.json())
+        .then(data=>console.log(data))
+        .catch(err=>console.log(err))
+
+
+
+
+
+    }
+
     return(
         <div className="container">
             <h1>Create a Recipe</h1>
@@ -22,7 +48,7 @@ const CreateRecipePage=()=>{
                 {errors.title && <p style={{color:'red'}}><small>Title is required</small></p>}
 
                 {errors.title?.type === "maxLength" && <p style={{color:'red'}}><small>Title should be less than 25 characters</small></p>}
-                
+
                 <FormGroup>
                     <FormLabel>Description</FormLabel>
                     <FormControl as="textarea" rows={5}
@@ -37,7 +63,7 @@ const CreateRecipePage=()=>{
 
                 <br></br>
                 <FormGroup>
-                    <Button variant="primary">
+                    <Button variant="primary" onClick={handleSubmit(createRecipe)}>
                         Save
                     </Button>
                 </FormGroup>
