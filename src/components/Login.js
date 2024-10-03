@@ -5,20 +5,34 @@ import { useForm } from "react-hook-form";
 
 const LoginPage=()=>{
 
-    const {register, handleSubmit, watch, formState:{errors}} = useForm()
+    const {register, handleSubmit, watch, reset, formState:{errors}} = useForm()
 
-    console.log(watch('username'))
+    // console.log(watch('username'))
+    // console.log(watch('password'))
 
 
     // const [username, setUsername] = useState('')
     // const [password, setPassword] = useState('')
 
-    const loginUser=()=>{
-        // console.log(username);
-        // console.log(password);
+    const loginUser=(data)=>{
+        console.log(data)
 
-        // setUsername('')
-        // setPassword('')
+        const requestOptions={
+            method:"POST",
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(data)
+        }
+
+        fetch('/auth/login', requestOptions)
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+        })
+
+
+        reset()
     }
 
    
@@ -45,7 +59,7 @@ const LoginPage=()=>{
                         />
                     </FormGroup>
                     {errors.password && <p style={{ color: "red" }}><small>Password is required</small></p>}
-                    {errors.password?.type === "minLength" && <p style={{ color: "red" }}><small>Min characters should be 8</small></p>}
+                    {errors.password?.type === "minLength" && <p style={{ color: "red" }}><small>Password should be more than 8 characters</small></p>}
                     <br></br>
                     <FormGroup>
                     <Button as="sub" variant="primary" onClick={handleSubmit(loginUser)}>
