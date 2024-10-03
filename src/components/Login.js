@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { Form, FormControl, FormGroup, FormLabel, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { login } from '../auth'
+import { useNavigate } from 'react-router-dom'
+
+
 
 const LoginPage=()=>{
 
     const {register, handleSubmit, watch, reset, formState:{errors}} = useForm()
+
+    const navigate = useNavigate()
 
     // console.log(watch('username'))
     // console.log(watch('password'))
@@ -28,7 +34,10 @@ const LoginPage=()=>{
         fetch('/auth/login', requestOptions)
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+            console.log(data.access_token)
+            login(data.access_token)
+
+            navigate('/')
         })
 
 
