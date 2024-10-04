@@ -10,7 +10,7 @@ const Recipe=({title, description, onClick, onDelete})=>{
                 <p>{description}</p>
                 <Button variant="primary" onClick={onClick}>Update</Button>
                 {' '}
-                <Button variant="danger" onClick={onDelete}>Delete</Button>
+                <Button className="delete-button" variant="danger" onClick={onDelete}>Delete</Button>
             </CardBody>
             
         </Card>
