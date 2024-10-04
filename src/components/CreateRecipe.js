@@ -1,77 +1,69 @@
 import React from "react";
-import { Form,Button, FormGroup, FormLabel, FormControl } from "react-bootstrap";
-import {useForm} from 'react-hook-form'
+import { Form, Button, FormGroup, FormLabel, FormControl } from "react-bootstrap";
+import { useForm } from 'react-hook-form';
 
 
-const CreateRecipePage=()=>{
+const CreateRecipePage = () => {
 
-    const {register, handleSubmit, reset, formState:{errors}} = useForm()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const createRecipe =(data)=>{
-        console.log(data)
+    const createRecipe = (data) => {
+        console.log(data);
         const token = localStorage.getItem('REACT_TOKEN_AUTH_KEY');
-        console.log(token)
+        console.log(token);
 
-        const requestOptions={
-            method:'POST',
-            headers:{
-                'content-type':'application/json',
-                'Authorization':`Bearer ${JSON.parse(token)}`
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(token)}`
             },
-            body:JSON.stringify(data)
-
-        }
+            body: JSON.stringify(data)
+        };
 
         fetch('/recipe/recipes', requestOptions)
-        .then(res=>res.json())
-        .then(data=>{
-            reset()
-    })
-        .catch(err=>console.log(err))
+            .then(res => res.json())
+            .then(data => {
+                reset();
+            })
+            .catch(err => console.log(err));
+    };
 
-
-
-
-
-    }
-
-    return(
+    return (
         <div className="container">
-            <h1>Create a Recipe</h1>
-            <form>
+            <h1 className="heading">Create a Recipe</h1>
+            <Form className="form" onSubmit={handleSubmit(createRecipe)}>
                 <FormGroup>
-                    <FormLabel>Title</FormLabel>
-                    <FormControl type="text"
-                    {...register('title', {required:true, maxLength:25})}
-
+                    <FormLabel className="form-label">Title</FormLabel>
+                    <FormControl 
+                        className="form-input"
+                        type="text"
+                        {...register('title', { required: true, maxLength: 25 })}
                     />
                 </FormGroup>
-
-                {errors.title && <p style={{color:'red'}}><small>Title is required</small></p>}
-
-                {errors.title?.type === "maxLength" && <p style={{color:'red'}}><small>Title should be less than 25 characters</small></p>}
+                {errors.title && <p className="error-text">Title is required</p>}
+                {errors.title?.type === "maxLength" && <p className="error-text">Title should be less than 25 characters</p>}
 
                 <FormGroup>
-                    <FormLabel>Description</FormLabel>
-                    <FormControl as="textarea" rows={5}
-                     {...register('description', {required:true, maxLength:255})}
-                     
+                    <FormLabel className="form-label">Description</FormLabel>
+                    <FormControl 
+                        className="form-input"
+                        as="textarea" 
+                        rows={5}
+                        {...register('description', { required: true, maxLength: 255 })}
                     />
                 </FormGroup>
+                {errors.description && <p className="error-text">Description is required</p>}
+                {errors.description?.type === "maxLength" && <p className="error-text">Description should be less than 255 characters</p>}
 
-                {errors.description && <p style={{color:'red'}}><small>Description is required</small></p>}
-
-                {errors.description?.type === "maxLength" && <p style={{color:'red'}}><small>Description should be less than 255 characters</small></p>}
-
-                <br></br>
-                <FormGroup>
-                    <Button variant="primary" onClick={handleSubmit(createRecipe)}>
+                <FormGroup className="form-button-group">
+                    <Button className="form-button" variant="primary" type="submit">
                         Save
                     </Button>
                 </FormGroup>
-            </form>
+            </Form>
         </div>
-    )
-}
+    );
+};
 
-export default CreateRecipePage
+export default CreateRecipePage;
