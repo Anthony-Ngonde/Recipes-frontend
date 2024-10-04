@@ -4,7 +4,7 @@ from frontend.models import Recipe, User
 from frontend.exts import db
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from frontend.src.recipes import recipe_ns
+from frontend.recipes import recipe_ns
 from frontend.auth import auth_ns
 from flask_cors import CORS
 
