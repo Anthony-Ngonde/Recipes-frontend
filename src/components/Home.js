@@ -4,13 +4,12 @@ import { useAuth } from "../auth";
 import Recipe from "./Recipe";
 import { Modal, ModalBody, ModalHeader, ModalTitle } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Form, Button, FormControl, FormGroup, FormLabel } from "react-bootstrap";
-
+import { Button, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 
 const LoggedinHome = () => {
     const [recipes, setRecipes] = useState([]);
     const [show, setShow] = useState(false);
-    const { register, reset, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
     const [recipeId, setRecipeId] = useState(0);
 
     useEffect(() => {
@@ -38,8 +37,8 @@ const LoggedinHome = () => {
     const showModal = (id) => {
         setShow(true);
         setRecipeId(id);
-        recipes.map((recipe) => {
-            if (recipe.id == id) {
+        recipes.forEach((recipe) => {
+            if (recipe.id === id) {
                 setValue('title', recipe.title);
                 setValue('description', recipe.description);
             }

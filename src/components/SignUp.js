@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Form, FormControl, FormGroup, FormLabel, Button, Alert } from "react-bootstrap";
+import { FormControl, FormGroup, FormLabel, Button, Alert } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const SignUpPage = () => {
 
-    const { register, watch, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const [show, setShow] = useState(true)
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Modal, CardBody, CardTitle, Button } from "react-bootstrap";
+import { Card, CardBody, CardTitle, Button } from "react-bootstrap";
 
 
 const Recipe=({title, description, onClick, onDelete})=>{

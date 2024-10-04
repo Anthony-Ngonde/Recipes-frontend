@@ -14,7 +14,9 @@ const LoggedInLinks = () => {
                 <Link className="nav-link active" to="/create_recipe">Create Recipes</Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link active" href="#" onClick={() => { logout() }}>Log Out</a>
+                <button className="nav-link active btn btn-link" onClick={() => logout()}>
+                    Log Out
+                </button>
             </li>
         </>
     );
